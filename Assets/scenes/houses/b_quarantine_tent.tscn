@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/scenes/locations/house_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/scenes/houses/int_quarantine_tent.png" type="Texture" id=2]
+[ext_resource path="res://Assets/scenes/houses/ext_quarantine_tent.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 93, 36 )
+
+[node name="quarantine_tent" instance=ExtResource( 1 )]
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="." index="0"]
+polygon = PoolVector2Array( -95, -50, -95, -50, 96, -51, 96, -66, -95, -66 )
+
+[node name="Polygon2D" parent="house" index="0"]
+color = Color( 0, 0, 0, 0.2 )
+polygon = PoolVector2Array( -96, -5, -74, 21, 48, 44, 126, 19, 126, 19, 125, -40, 96, -64, -95, -67 )
+
+[node name="interior" parent="house" index="1"]
+position = Vector2( 0.5, -52.5 )
+texture = ExtResource( 2 )
+
+[node name="exterior" parent="house" index="2"]
+position = Vector2( 0.5, -52.5 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="house/area_detection" index="0"]
+position = Vector2( 0, -44 )
+shape = SubResource( 1 )
+
+[node name="CollisionPolygon2D" parent="house" index="4"]
+polygon = PoolVector2Array( -95, -16, -91, -16, -91, -9, 92, -9, 92, -16, 92, -16, 92, -16, 96, -16, 96, -4, -95, -4 )

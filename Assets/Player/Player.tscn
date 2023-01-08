@@ -1,0 +1,64 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Player/Character_1.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/Player.gd" type="Script" id=2]
+[ext_resource path="res://joystick/addon/joystick/virtual_joystick.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/arial.ttf" type="DynamicFontData" id=4]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 4.00001
+height = 5.99998
+
+[sub_resource type="DynamicFont" id=2]
+size = 40
+font_data = ExtResource( 4 )
+
+[node name="Player" type="KinematicBody2D" groups=["survivor"]]
+collision_layer = 8
+script = ExtResource( 2 )
+joystickLeftPath = NodePath("UI/Virtual joystick")
+speed = 400.0
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1, -14 )
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 14
+frame = 2
+
+[node name="Node" type="Node" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1 )
+rotation = 1.57079
+shape = SubResource( 1 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Virtual joystick" parent="UI" instance=ExtResource( 3 )]
+margin_left = 132.0
+margin_top = -325.0
+margin_right = 332.0
+margin_bottom = -125.0
+
+[node name="Virtual joystick2" parent="UI" instance=ExtResource( 3 )]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -328.0
+margin_top = -337.0
+margin_right = -128.0
+margin_bottom = -137.0
+joystick_mode = 1
+use_input_actions = false
+
+[node name="Label" type="Label" parent="UI"]
+margin_left = 104.0
+margin_top = 63.0
+margin_right = 247.0
+margin_bottom = 109.0
+custom_fonts/font = SubResource( 2 )
+text = "CHUNK"
+valign = 1
