@@ -63,7 +63,7 @@ var road_modifiers = {
 #	for i in map.get_used_cells_by_id(0) :
 #		print(map.get_cell_autotile_coord(i.x,i.y))
 func _init(): 
-	SceneAdder._sleep_msec = 30
+	SceneAdder._sleep_msec = 50
 	SceneAdder.set_groups(GROUPS)
 
 func _input(event):
