@@ -33,6 +33,7 @@ var chunk_data = {}
 
 func _ready():
 	player = get_node(player_path)
+	player.chunk_loader = self
 	current_chunk = _get_player_chunk(player.global_position)
 	var d = Global_DataParser.load_data("user://player_data.bin")
 	start_up(d)
@@ -49,6 +50,8 @@ func _process(_delta):
 	else:
 		chunk_loaded = false
 	previous_chunk = current_chunk
+	
+	
 
 #This converts the players position to it's chunk coordinates
 #subtracting one from the range lerp just makes sure that the chunk is actually changed when it's on

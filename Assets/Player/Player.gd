@@ -6,6 +6,7 @@ export (NodePath) var joystickLeftPath
 onready var joystickLeft : VirtualJoystick = get_node(joystickLeftPath)
 
 export var speed : float = 100
+var chunk_loader
 
 #export (NodePath) var joystickRightPath
 #onready var joystickRight : VirtualJoystick = get_node(joystickRightPath)
@@ -24,5 +25,6 @@ export var speed : float = 100
 
 func _physics_process(delta):
 	if joystickLeft and joystickLeft.is_pressed():
-		move_and_slide(joystickLeft.get_output() * speed  )
-	$UI/Label.text = str(Engine.get_frames_per_second())
+		move_and_slide(joystickLeft.get_output() * speed)
+		
+	$UI/Label.text = "fps: " + str(Engine.get_frames_per_second()) + " Active Chunks: "+ String(chunk_loader.active_chunks.size()) + " To Load: " + String(SceneLoader._to_load.size())

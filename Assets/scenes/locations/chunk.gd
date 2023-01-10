@@ -13,6 +13,11 @@ func _ready():
 #	SceneLoader.load_scene_sync(self, chunk_floor)
 #	SceneLoader.load_scene_async(self, chunk_floor, global_position, true)
 
+#	var chunk_floor = preload("res://Assets/scenes/floor.tscn").instance()
+#	add_child(chunk_floor)
+#
+#	chunk_loaded = true
+
 func _draw():
 	draw_rect(Rect2(Vector2(-1500, -1500), Vector2(3000, 3000)), Color(rand_range(.5, 1.0), rand_range(.5, 1.0), rand_range(.5, 1.0)), false)
 
