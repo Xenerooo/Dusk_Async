@@ -65,10 +65,10 @@ func _get_player_chunk(pos):
 	var chunk_pos = Vector2()
 	chunk_pos.y = int(pos.y/chunk_size)
 	chunk_pos.x = int(pos.x/chunk_size)
-	if pos.x < 0:
-		chunk_pos.x -= 1
-	if pos.y < 0:
-		chunk_pos.y -= 1
+#	if pos.x < 0:
+#		chunk_pos.x -= 1
+#	if pos.y < 0:
+#		chunk_pos.y -= 1
 	return chunk_pos
 
 #The render bound in the rect width of the render distance. ie render distance of 2
@@ -131,12 +131,15 @@ func instance_location(chunk_coord, _chunk, chunk_key, data) :
 	var chunk_end_pos = Vector2(chunk_start_pos.x + (chunk_size / 2) , chunk_start_pos.y + (chunk_size / 2)  )
 	
 	var chunksrc = "res://Assets/scenes/locations/chunk.tscn"
-	SceneLoader.load_scene_async_with_cb(self, chunksrc, chunk_end_pos, true, funcref(self, "load_c"), {"chunk_coord" : chunk_coord, "chunk_key" : chunk_key, "data" : data})
+	SceneLoader.load_scene_async_with_cb($TileMap, chunksrc, chunk_end_pos, true, funcref(self, "load_c"), {"chunk_coord" : chunk_coord, "chunk_key" : chunk_key, "data" : data})
+
+	print("instancing location :" + str(chunk_coord))
 	loading_chunk.append(chunk_coord)
 
 
 func load_c( path : String, instance : Node, pos : Vector2, is_pos_global : bool, data : Dictionary):
 	instance.position = pos
 	instance.start(data["chunk_key"], data["data"], self,data)
+	print("chunk loaded :" + str(data["chunk_key"]))
 	add_child(instance)
 

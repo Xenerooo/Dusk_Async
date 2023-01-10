@@ -83,7 +83,7 @@ func _run_thread(_arg : int) -> void:
 			while _is_running and not is_reset and _can_add(group):
 				is_reset = _add_entry(_to_adds[group], group)
 
-		OS.delay_msec(2)
+		OS.delay_msec(10)
 
 func _add_entry(from : Array, group : String) -> bool:
 	var entry = from.pop_front()
@@ -145,7 +145,6 @@ func _check_for_new_scenes() -> bool:
 	for entry in to_add:
 		var target = entry["target"]
 		var has_priority = entry["has_priority"]
-		#OS.delay_msec(1)
 		var instance = entry["instance"]
 
 		# Get the queue for this instance type

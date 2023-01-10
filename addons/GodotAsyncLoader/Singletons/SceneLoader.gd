@@ -114,7 +114,7 @@ func _run_thread(_arg : int) -> void:
 					#self.call_deferred("_on_done", target, path, pos, is_pos_global, cb, instance, data)
 					#print("??????? instance.global_transform.origin: %s" % instance.global_transform.origin)
 
-		OS.delay_msec(2)
+		OS.delay_msec(50)
 
 func _on_done(target : Node, path : String, pos : Vector2, is_pos_global : bool, cb : FuncRef, instance : Node, data : Dictionary) -> void:
 	var start := OS.get_ticks_msec()

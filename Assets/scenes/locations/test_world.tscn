@@ -15,10 +15,11 @@ render_distance = 1
 chunk_size = 3000.0
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 65, 65 )
+position = Vector2( 12049, 8232 )
 speed = 16000.0
 
 [node name="Camera2D" type="Camera2D" parent="YSort/Player"]
 current = true
+zoom = Vector2( 10, 10 )
 limit_left = 0
 limit_top = 0
