@@ -12,7 +12,12 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "FutureThreadPool",
 "language": "GDScript",
-"path": "res://addons/ThreadPool++/future_thread_pool.gd"
+"path": "res://addons/thread_pool/future_thread_pool.gd"
+}, {
+"base": "Node",
+"class": "ThreadPool",
+"language": "GDScript",
+"path": "res://addons/thread_pool/thread_pool.gd"
 }, {
 "base": "Control",
 "class": "VirtualJoystick",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "FutureThreadPool": "",
+"ThreadPool": "",
 "VirtualJoystick": ""
 }
 
@@ -36,7 +42,7 @@ Global_DataParser="*res://autoload/Global_DataParser.gd"
 SceneLoader="*res://addons/GodotAsyncLoader/Singletons/SceneLoader.gd"
 SceneAdder="*res://addons/GodotAsyncLoader/Singletons/SceneAdder.gd"
 SceneSwitcher="*res://addons/GodotAsyncLoader/Singletons/SceneSwitcher.gd"
-ThreadPoolManager="*res://addons/ThreadPool++/thread_pool_manager.gd"
+AThreadPool="*res://addons/A_ThreadPool.gd"
 
 [display]
 
@@ -50,7 +56,7 @@ window/stretch/aspect="keep_height"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/GodotAsyncLoader/plugin.cfg", "res://addons/ThreadPool++/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/GodotAsyncLoader/plugin.cfg" )
 
 [gui]
 

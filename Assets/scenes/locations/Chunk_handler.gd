@@ -94,9 +94,10 @@ func load_chunk():
 			#loading chunks stores the coords that are in the new render chunk
 			#this if statement makes sure that only the coords that are not already active are loaded\:
 			if active_coord.find(chunk_coords) == -1 and chunk_data.has(var2str(chunk_coords)) and !loading_chunk.has(chunk_coords):
-
 				var chunki 
 				instance_location(chunk_coords, chunki, chunk_key, chunk_data[var2str(chunk_coords)])
+#				$ThreadPool.submit_task(self, "instance_location",[chunk_coords, chunki, chunk_key, chunk_data[var2str(chunk_coords)]], self)
+#				instance_location(chunk_coords, chunki, chunk_key, chunk_data[var2str(chunk_coords)])
 
 #				chunki.start(chunk_key, chunk_data[var2str(chunk_coords)])
 #				add_child(chunk)
@@ -126,20 +127,30 @@ func _get_chunk_key(coords : Vector2):
 	key.x = wrapf(coords.x, -revolution_distance, revolution_distance+1)
 	return key
  
-func instance_location(chunk_coord, _chunk, chunk_key, data) :
+func instance_location(chunk_coord, chunki, chunk_key, data) :
 	var chunk_start_pos = chunk_coord * chunk_size
 	var chunk_end_pos = Vector2(chunk_start_pos.x + (chunk_size / 2) , chunk_start_pos.y + (chunk_size / 2)  )
-	
 	var chunksrc = "res://Assets/scenes/locations/chunk.tscn"
-	SceneLoader.load_scene_async_with_cb($TileMap, chunksrc, chunk_end_pos, true, funcref(self, "load_c"), {"chunk_coord" : chunk_coord, "chunk_key" : chunk_key, "data" : data})
-
-	print("instancing location :" + str(chunk_coord))
+	
+#	SceneLoader.load_scene_async_with_cb($TileMap, chunksrc, chunk_end_pos, true, funcref(self, "load_c"), {"chunk_coord" : chunk_coord, "chunk_key" : chunk_key, "data" : data})
+	var instance = preload("res://Assets/scenes/locations/chunk.tscn").instance()
+	
+	var chunk_data = {
+		"chunksrc" : chunksrc,
+		"chunk_end_pos" : chunk_end_pos,
+		"chunk_coord" : chunk_coord,
+		"chunk_key" : chunk_key,
+		"data" : data,
+		"instance" : instance
+		}
+		
+	ready_chunk(chunk_data)
+	
 	loading_chunk.append(chunk_coord)
 
-
-func load_c( path : String, instance : Node, pos : Vector2, is_pos_global : bool, data : Dictionary):
-	instance.position = pos
-	instance.start(data["chunk_key"], data["data"], self,data)
-	print("chunk loaded :" + str(data["chunk_key"]))
-	add_child(instance)
-
+func ready_chunk(chunk_data): 
+#	print(chunk_data)
+	chunk_data.instance.position = chunk_data.chunk_end_pos
+	chunk_data.instance.start(chunk_data.chunk_key, chunk_data.data, self, chunk_data)
+	add_child(chunk_data.instance)
+	
